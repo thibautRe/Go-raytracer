@@ -2,12 +2,16 @@ package main
 
 import (
     "fmt"
+    "os"
     "encoding/json"
     "io/ioutil"
+    "image"
+    "image/color"
+    "image/png"
 )
 
 type SceneDescriptor struct {
-    BackgroundColor string
+    BackgroundColor color.RGBA
     Height int
     Width int
 }
@@ -23,5 +27,19 @@ func main() {
         fmt.Println(err2)
     }
 
-    fmt.Println(scene, err);
+    // Create the image
+    im := image.NewRGBA(image.Rectangle{image.Point{0,0}, image.Point{scene.Width, scene.Height}})
+
+
+    // Fill the Background
+    bounds := im.Bounds()
+    for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
+        for x := bounds.Min.X; x < bounds.Max.X; x++ {
+            im.Set(x, y, scene.BackgroundColor)
+        }
+    }
+
+    // Save the image
+    file, _ := os.Create("render/test.png")
+    png.Encode(file, im)
 }

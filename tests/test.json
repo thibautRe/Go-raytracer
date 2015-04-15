@@ -1,5 +1,10 @@
 {
-    "BackgroundColor": "#CCA",
+    "BackgroundColor": {
+        "R": 140,
+        "G": 230,
+        "B": 255,
+        "A": 255
+    },
     "Height": 256,
-    "Width": 256
+    "Width": 512
 }
