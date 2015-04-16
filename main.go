@@ -6,34 +6,12 @@ import (
     "encoding/json"
     "io/ioutil"
     "image"
-    "image/color"
     "image/png"
-    "./src/raymath"
+    "./src/rayobject"
 )
 
-type Object struct {
-    Type string
-    Size float64
-    Center raymath.Point
-    Color color.RGBA
-}
-
-type Light struct {
-    Type string
-    Color color.RGBA
-    Center raymath.Point
-}
-
-type SceneDescriptor struct {
-    BackgroundColor color.RGBA
-    Height int
-    Width int
-    Objects []Object
-    Lights []Light
-}
-
 func main() {
-    var scene SceneDescriptor
+    var scene rayobject.Scene
     fileContent, err := ioutil.ReadFile("tests/test.json")
     if err != nil {
         fmt.Println(err)
@@ -58,4 +36,5 @@ func main() {
     // Save the image
     file, _ := os.Create("render/test.png")
     png.Encode(file, im)
+    fmt.Println(scene)
 }
