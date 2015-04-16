@@ -8,23 +8,20 @@ import (
     "image"
     "image/color"
     "image/png"
+    "./src/raymath"
 )
-
-type Point struct {
-    X, Y, Z float64
-}
 
 type Object struct {
     Type string
     Size float64
-    Center Point
+    Center raymath.Point
     Color color.RGBA
 }
 
 type Light struct {
     Type string
     Color color.RGBA
-    Center Point
+    Center raymath.Point
 }
 
 type SceneDescriptor struct {
@@ -32,6 +29,7 @@ type SceneDescriptor struct {
     Height int
     Width int
     Objects []Object
+    Lights []Light
 }
 
 func main() {
@@ -60,6 +58,4 @@ func main() {
     // Save the image
     file, _ := os.Create("render/test.png")
     png.Encode(file, im)
-
-    fmt.Println(scene)
 }
