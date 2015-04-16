@@ -10,10 +10,28 @@ import (
     "image/png"
 )
 
+type Point struct {
+    X, Y, Z float64
+}
+
+type Object struct {
+    Type string
+    Size float64
+    Center Point
+    Color color.RGBA
+}
+
+type Light struct {
+    Type string
+    Color color.RGBA
+    Center Point
+}
+
 type SceneDescriptor struct {
     BackgroundColor color.RGBA
     Height int
     Width int
+    Objects []Object
 }
 
 func main() {
@@ -42,4 +60,6 @@ func main() {
     // Save the image
     file, _ := os.Create("render/test.png")
     png.Encode(file, im)
+
+    fmt.Println(scene)
 }
