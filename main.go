@@ -5,9 +5,9 @@ import (
     "os"
     "encoding/json"
     "io/ioutil"
-    "image"
     "image/png"
     "./src/rayobject"
+    "./src/raymath"
 )
 
 func main() {
@@ -21,20 +21,8 @@ func main() {
         fmt.Println(err2)
     }
 
-    // Create the image
-    im := image.NewRGBA(image.Rectangle{image.Point{0,0}, image.Point{scene.Width, scene.Height}})
-
-
-    // Fill the Background
-    bounds := im.Bounds()
-    for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
-        for x := bounds.Min.X; x < bounds.Max.X; x++ {
-            im.Set(x, y, scene.BackgroundColor)
-        }
-    }
-
     // Save the image
     file, _ := os.Create("render/test.png")
-    png.Encode(file, im)
+    png.Encode(file, scene.Render())
     fmt.Println(scene)
 }
