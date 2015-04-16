@@ -1,6 +1,6 @@
 {
     "BackgroundColor": {
-        "R": 140,
+        "R": 250,
         "G": 230,
         "B": 255,
         "A": 255
@@ -11,46 +11,36 @@
     "MaxRecursion": 3,
     "Objects": [
         {
-            "Type" : "Sphere",
-            "Size": 2,
+            "Type": "Mesh",
+            "Size": 1,
             "Center": {
                 "X": 0,
                 "Y": 0,
-                "Z": 0
+                "Z": 6
             },
+            "Faces": [
+                [
+                    {"X": 1,"Y": 1,"Z": 0},
+                    {"X": -1,"Y": -1,"Z": 0},
+                    {"X": 1,"Y": -1,"Z": 0}
+                ]
+            ],
             "Material": {
                 "Type": "Diffuse",
                 "Color": {
                     "R": 255,
-                    "G": 0,
-                    "B": 50,
-                    "A": 255
-                }
-            }
-        }, {
-            "Type" : "Sphere",
-            "Size": 2,
-            "Center": {
-                "X": 1,
-                "Y": 1,
-                "Z": 1
-            },
-            "Material": {
-                "Type": "Diffuse",
-                "Color": {
-                    "R": 0,
                     "G": 255,
-                    "B": 20,
+                    "B": 200,
                     "A": 255
                 }
-            }
+            }    
         }
     ],
     "Camera": {
         "Center": {
             "X": 10,
             "Y": 0,
-            "Z": 0
+            "Z": 1
         },
         "Direction": {
             "X": 1,

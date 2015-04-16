@@ -2,7 +2,6 @@ package rayobject
 
 import (
     "../raymath"
-    "math"
     "image"
     "image/color"
 )
@@ -40,44 +39,41 @@ func (scene Scene) Render() *image.RGBA {
 func (scene Scene) GetColor(r raymath.Ray) color.RGBA {
     // All objects
     minDist := 1e8
+    var dist float64
     var touchedObject Object
-    var impactPoint raymath.Point
-    var normal raymath.Vector
+    var impactPoint, impactPointObject raymath.Point
+    var normal, normalObject raymath.Vector
+
     hasTouched := false
     for i := range scene.Objects {
         o := scene.Objects[i]
-        // Test Sphere intersection
-        if o.Type == "Sphere" {
-            dist := r.GetDistanceToPoint(o.Center)
 
-            // Condition for the ray to touch
-            if dist <= o.Size && dist > 0 {
-                // Get the distance to the intersection from
-                // the ray to the sphere
-                BA := raymath.NewVector(r.Origin, o.Center)
-                scalar := r.Direction.ScalarProduct(BA)
-                norm := r.Direction.Abs()
-                delta := math.Pow(2*scalar, 2) - 4*norm*norm*(math.Pow(BA.Abs(), 2) - o.Size*o.Size)
-                a := (2*scalar - math.Sqrt(delta))/(2*norm)
-                dist := a*math.Sqrt(norm)
-                if (dist < minDist) {
+        switch o.Type {
+        // Test Sphere intersection
+        case "Sphere":
+            dist, impactPointObject, normalObject = Sphere(o).Intersection(r)
+            if dist < minDist && dist > 0 {
+                minDist = dist
+                hasTouched = true
+                touchedObject = o
+                impactPoint = impactPointObject
+                normal = normalObject
+            }
+        // Standard triangle mesh
+        case "Mesh":
+            for i := range o.Faces {
+                dist, impactPointObject, normalObject = o.Faces[i].Intersection(r)
+                if dist < minDist && dist > 0 {
                     minDist = dist
                     hasTouched = true
                     touchedObject = o
-
-                    impactPoint = raymath.Point{
-                        r.Origin.X + a*r.Direction.X,
-                        r.Origin.Y + a*r.Direction.Y,
-                        r.Origin.Z + a*r.Direction.Z,
-                    }
-                    normal = raymath.Vector{
-                        impactPoint.X - o.Center.X,
-                        impactPoint.Y - o.Center.Y,
-                        impactPoint.Z - o.Center.Z,
-                    }
+                    impactPoint = impactPointObject
+                    normal = normalObject
                 }
             }
+
         }
+
     }
 
     if hasTouched {
