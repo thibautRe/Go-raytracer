@@ -10,7 +10,7 @@
     "Objects": [
         {
             "Type" : "Sphere",
-            "Size": 1,
+            "Size": 2,
             "Center": {
                 "X": 0,
                 "Y": 0,
@@ -59,6 +59,6 @@
             "Y": 1,
             "Z": 3
         },
-        "LensFac": 1
+        "LensFac": 0.5
     }
 }

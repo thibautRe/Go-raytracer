@@ -9,8 +9,8 @@ type Camera struct {
     LensFac float64
 }
 
-func (c Camera) GetRay(xPercent float64, yPercent float64) raymath.Ray {
+func (c Camera) GetFirstRay(xPercent float64, yPercent float64) raymath.Ray {
     Normal2 := c.Direction.VectorialProduct(c.Normal)
-    direction := c.Direction.GetUnit().Plus(c.Normal.GetUnit().Mult(c.LensFac*(2*yPercent-2))).Plus(Normal2.GetUnit().Mult(c.LensFac*(2*xPercent-2)))
+    direction := c.Direction.GetUnit().Plus(c.Normal.GetUnit().Mult(c.LensFac*(2*yPercent-1))).Plus(Normal2.GetUnit().Mult(c.LensFac*(2*xPercent-1)))
     return raymath.Ray{c.Center, direction}
 }
