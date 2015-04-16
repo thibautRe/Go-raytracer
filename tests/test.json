@@ -6,7 +6,7 @@
         "A": 255
     },
     "Height": 256,
-    "Width": 512,
+    "Width": 256,
     "Objects": [
         {
             "Type" : "Sphere",
@@ -42,5 +42,23 @@
                 "EmitIntensity": 1
             }
         }
-    ]
+    ],
+    "Camera": {
+        "Center": {
+            "X": 0,
+            "Y": -10,
+            "Z": 5
+        },
+        "Direction": {
+            "X": 0,
+            "Y": 3,
+            "Z": -1
+        },
+        "Normal": {
+            "X": 0,
+            "Y": 1,
+            "Z": 3
+        },
+        "LensFac": 1
+    }
 }

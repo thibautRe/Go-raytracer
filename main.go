@@ -7,7 +7,6 @@ import (
     "io/ioutil"
     "image/png"
     "./src/rayobject"
-    "./src/raymath"
 )
 
 func main() {
