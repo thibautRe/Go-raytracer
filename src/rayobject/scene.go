@@ -9,5 +9,4 @@ type Scene struct {
     Height int
     Width int
     Objects []Object
-    Lights []Light
 }

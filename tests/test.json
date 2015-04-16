@@ -10,33 +10,36 @@
     "Objects": [
         {
             "Type" : "Sphere",
-            "Size": 3,
+            "Size": 1,
             "Center": {
-                "X": 3,
+                "X": 0,
                 "Y": 0,
                 "Z": 0
             },
-            "Color": {
-                "R": 50,
-                "G": 200,
-                "B": 100,
-                "A": 200
+            "Material": {
+                "Color": {
+                    "R": 255,
+                    "G": 0,
+                    "B": 0,
+                    "A": 255
+                }
             }
-        }
-    ],
-    "Lights": [
-        {
-            "Type": "Point",
-            "Color": {
-                "R": 255,
-                "G": 200,
-                "B": 100,
-                "A": 255
-            },
+        }, {
+            "Type" : "Sphere",
+            "Size": 0.2,
             "Center": {
-                "X": -4,
-                "Y": 1,
-                "Z": -1
+                "X": -3,
+                "Y": 0,
+                "Z": 0
+            },
+            "Material": {
+                "EmitColor": {
+                    "R": 0,
+                    "G": 255,
+                    "B": 0,
+                    "A": 255
+                },
+                "EmitIntensity": 1
             }
         }
     ]
