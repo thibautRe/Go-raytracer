@@ -8,7 +8,7 @@ type Object struct {
     Type string
     Size float64
     Center raymath.Point
-    Material Material
+    Materials []Material
     Faces []Face
 }
 

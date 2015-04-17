@@ -12,6 +12,7 @@ type Material struct {
     Type string
     Color color.RGBA
     Intensity float64
+    Fac float64
 }
 
 func init() {
