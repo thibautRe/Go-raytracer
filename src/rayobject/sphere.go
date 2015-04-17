@@ -3,17 +3,12 @@ package rayobject
 import (
     "math"
     "../raymath"
+    //"fmt"
 )
 
 type Sphere Object
 
 func (s Sphere) Intersection(r raymath.Ray) (float64, raymath.Point, raymath.Vector) {
-    distance := r.GetDistanceToPoint(s.Center)
-
-    // If the ray is too far away from the center of the sphere
-    if distance > s.Size || distance <= 0 {
-        return 0, raymath.Orig, raymath.VectorNull
-    }
 
     // Get the distance to the intersection from
     // the ray to the sphere
@@ -21,8 +16,14 @@ func (s Sphere) Intersection(r raymath.Ray) (float64, raymath.Point, raymath.Vec
     scalar := r.Direction.ScalarProduct(BA)
     norm := r.Direction.Abs()
     delta := math.Pow(2*scalar, 2) - 4*norm*norm*(math.Pow(BA.Abs(), 2) - s.Size*s.Size)
-    a := (2*scalar - math.Sqrt(delta))/(2*norm)
-    dist := a*math.Sqrt(norm)
+
+    // If the ray is too far away from the center of the sphere
+    if delta <= 0 {
+        return 0, raymath.Orig, raymath.VectorNull
+    }
+
+    a := (2*scalar - math.Sqrt(delta))/(2*norm*norm)
+    dist := a*norm
 
     impactPoint := raymath.Point{
         r.Origin.X + a*r.Direction.X,

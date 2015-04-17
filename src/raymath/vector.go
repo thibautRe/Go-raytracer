@@ -9,7 +9,7 @@ type Vector struct {
 var VectorNull = Vector{0,0,0}
 
 func NewVector(p1 Point, p2 Point) Vector {
-    return Vector{p1.X - p2.X, p1.Y - p2.Y, p1.Z - p2.Z}
+    return Vector{p2.X - p1.X, p2.Y - p1.Y, p2.Z - p1.Z}
 }
 
 ////// METHODS //////

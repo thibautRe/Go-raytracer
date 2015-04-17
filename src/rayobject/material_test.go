@@ -4,10 +4,13 @@ import (
     "testing"
     "image/color"
     "../raymath"
+    "math/rand"
+    "time"
+    "fmt"
 )
 
 func TestGetBounceRays(t *testing.T) {
-    m := Material{"Diffuse", color.RGBA{0,0,0,0}}
+    m := Material{"Diffuse", color.RGBA{0,0,0,0}, 0}
 
     rays := m.GetBounceRays(raymath.Point{0,0,0}, raymath.Vector{0,0,1}, 10)
     if len(rays) != 10 {

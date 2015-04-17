@@ -4,6 +4,7 @@ import (
     "image/color"
     "math/rand"
     "../raymath"
+    "time"
     //"fmt"
 )
 
@@ -11,6 +12,10 @@ type Material struct {
     Type string
     Color color.RGBA
     Intensity float64
+}
+
+func init() {
+    rand.Seed(time.Now().UTC().UnixNano())
 }
 
 func (m Material) GetBounceRays(point raymath.Point, normal raymath.Vector, number int) []raymath.Ray {
@@ -62,7 +67,7 @@ func (m Material) GetDefaultLightray() raymath.Lightray {
     switch m.Type {
     case "Diffuse":
         l.Color = m.Color
-        l.Power = 0.1
+        l.Power = 0.01
     case "Emit":
         l.Color = m.Color
         l.Power = m.Intensity
