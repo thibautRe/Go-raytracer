@@ -79,12 +79,11 @@ func (scene Scene) GetLightray(r raymath.Ray, index int) raymath.Lightray {
     }
 
     if hasTouched {
-        if index <= scene.MaxRecursion {
-            bounceRays := touchedObject.Material.GetBounceRays(impactPoint, normal, scene.Samples);
-
+        bounceRays, bounceNumber := touchedObject.Material.GetBounceRays(impactPoint, normal, r, scene.Samples);
+        if index <= scene.MaxRecursion || bounceNumber == 0 {
             lightRays := make([]raymath.Lightray, len(bounceRays))
             for i := range bounceRays {
-                lightRays[i] = scene.GetLightray(bounceRays[i], index + 1)
+                lightRays[i] = scene.GetLightray(bounceRays[i], index + bounceNumber)
             }
 
             lightray := touchedObject.Material.ComputeLightrayFromLightrays(lightRays)

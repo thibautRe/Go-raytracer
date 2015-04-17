@@ -18,10 +18,10 @@ func init() {
     rand.Seed(time.Now().UTC().UnixNano())
 }
 
-func (m Material) GetBounceRays(point raymath.Point, normal raymath.Vector, number int) []raymath.Ray {
-    bounceRays := make([]raymath.Ray, number)
+func (m Material) GetBounceRays(point raymath.Point, normal raymath.Vector, incidentRay raymath.Ray, number int) ([]raymath.Ray, int) {
     switch m.Type {
     case "Diffuse":
+        bounceRays := make([]raymath.Ray, number)
         for i := 0; i < number; {
             tempVector := raymath.Vector{
                 rand.Float64()-0.5,
@@ -33,10 +33,17 @@ func (m Material) GetBounceRays(point raymath.Point, normal raymath.Vector, numb
                 i++
             }
         }
+        return bounceRays, 1
     case "Emit":
-        return make([]raymath.Ray, 0)
+        return make([]raymath.Ray, 0), 1
+    case "Transparent":
+        bounceRays := make([]raymath.Ray, 1)
+        bounceRays[0].Origin = point
+        bounceRays[0].Direction = incidentRay.Direction
+        return bounceRays, 0
     }
-    return bounceRays
+    bounceRays := make([]raymath.Ray, 0)
+    return bounceRays, 1
 }
 
 func (m Material) ComputeLightrayFromLightrays(lightrays []raymath.Lightray) raymath.Lightray {
@@ -56,6 +63,10 @@ func (m Material) ComputeLightrayFromLightrays(lightrays []raymath.Lightray) ray
     case "Emit":
         lightray.Color = m.Color
         lightray.Power = m.Intensity
+    case "Transparent":
+        // Only 1 lightray
+        lightray.Color = lightrays[0].Color
+        lightray.Power = lightrays[0].Power
     }
 
     return lightray
@@ -71,6 +82,9 @@ func (m Material) GetDefaultLightray() raymath.Lightray {
     case "Emit":
         l.Color = m.Color
         l.Power = m.Intensity
+    case "Transparent":
+        l.Color = color.RGBA{0,0,0,0}
+        l.Power = 0
     }
     return l
 }
