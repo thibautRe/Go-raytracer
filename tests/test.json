@@ -7,8 +7,8 @@
     },
     "Height": 256,
     "Width": 256,
-    "Samples": 10,
-    "MaxRecursion": 3,
+    "Samples": 5,
+    "MaxRecursion": 1,
     "Objects": [
         {
             "Type" : "Sphere",
@@ -16,7 +16,7 @@
             "Center": {
                 "X": 0,
                 "Y": 0,
-                "Z": 0
+                "Z": 2
             },
             "Material": {
                 "Type": "Diffuse",
@@ -33,32 +33,57 @@
             "Center": {
                 "X": 1,
                 "Y": 1,
-                "Z": 1
+                "Z": 2
             },
             "Material": {
-                "Type": "Diffuse",
+                "Type": "Emit",
                 "Color": {
                     "R": 0,
                     "G": 255,
                     "B": 20,
                     "A": 255
-                }
+                },
+                "Intensity": 20
             }
+        }, {
+            "Type": "Mesh",
+            "Size": 1,
+            "Center": {
+                "X": 0,
+                "Y": 0,
+                "Z": 0
+            },
+            "Faces": [
+                [
+                    {"X": 1,"Y": 1,"Z": 0},
+                    {"X": -1,"Y": -1,"Z": 0},
+                    {"X": 1,"Y": -1,"Z": 0}
+                ]
+            ],
+            "Material": {
+                "Type": "Diffuse",
+                "Color": {
+                    "R": 255,
+                    "G": 255,
+                    "B": 200,
+                    "A": 255
+                }
+            }    
         }
     ],
     "Camera": {
         "Center": {
             "X": 10,
             "Y": 0,
-            "Z": 0
+            "Z": 3
         },
         "Direction": {
             "X": 1,
             "Y": 0,
-            "Z": 0
+            "Z": 0.1
         },
         "Normal": {
-            "X": 0,
+            "X": -0.1,
             "Y": 0,
             "Z": 1
         },

@@ -9,6 +9,8 @@ type Ray struct {
     Direction Vector
 }
 
+var RayNull = Ray{Orig, VectorNull}
+
 type Lightray struct {
     Ray Ray
     Color color.RGBA

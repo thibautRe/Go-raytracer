@@ -29,22 +29,24 @@ func (scene Scene) Render() *image.RGBA {
             // Compute First Ray
             ray := scene.Camera.GetFirstRay(float64(x - bounds.Min.X)/float64(bounds.Max.X - bounds.Min.X), float64(y - bounds.Min.Y)/float64(bounds.Max.Y - bounds.Min.Y))
 
-            im.Set(x, y, scene.GetColor(ray))
+            lightray := scene.GetLightray(ray, 0)
+
+            im.Set(x, y, lightray.Color)
         }
     }
 
     return im
 }
 
-func (scene Scene) GetColor(r raymath.Ray) color.RGBA {
-    // All objects
+func (scene Scene) GetLightray(r raymath.Ray, index int) raymath.Lightray {
     minDist := 1e8
+    hasTouched := false
     var dist float64
     var touchedObject Object
     var impactPoint, impactPointObject raymath.Point
     var normal, normalObject raymath.Vector
 
-    hasTouched := false
+    // Go through all objects to check intersection
     for i := range scene.Objects {
         o := scene.Objects[i]
 
@@ -71,16 +73,29 @@ func (scene Scene) GetColor(r raymath.Ray) color.RGBA {
                     normal = normalObject
                 }
             }
-
         }
-
     }
 
     if hasTouched {
-        touchedObject.Material.GetBounceRays(impactPoint, normal, scene.Samples);
-        return touchedObject.Material.Color
+
+        if index <= scene.MaxRecursion {
+            bounceRays := touchedObject.Material.GetBounceRays(impactPoint, normal, scene.Samples);
+            lightRays := make([]raymath.Lightray, len(bounceRays))
+            for i := range bounceRays {
+                lightRays[i] = scene.GetLightray(bounceRays[i], index + 1)
+            }
+
+            lightray := touchedObject.Material.ComputeLightrayFromLightrays(lightRays)
+            return lightray
+        } else {
+            return touchedObject.Material.GetDefaultLightray()
+        }
     }
 
     // Else, return the backgroundcolor
-    return scene.BackgroundColor
+    return raymath.Lightray{
+        r,
+        scene.BackgroundColor,
+        0,
+    }
 }

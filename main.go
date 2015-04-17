@@ -21,6 +21,7 @@ func main() {
     }
 
     // Save the image
+    render := scene.Render()
     file, _ := os.Create("render/test.png")
-    png.Encode(file, scene.Render())
+    png.Encode(file, render)
 }
