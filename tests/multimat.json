@@ -2,7 +2,7 @@
     "BackgroundColor": {
         "R": 255,
         "G": 255,
-        "B": 255,
+        "B": 0,
         "A": 255
     },
     "Height": 250,
@@ -28,16 +28,6 @@
                         "B": 255,
                         "A": 255
                     }
-                }, {
-                    "Type": "Emit",
-                    "Fac": 1,
-                    "Color": {
-                        "R": 255,
-                        "G": 255,
-                        "B": 255,
-                        "A": 255
-                    },
-                    "Intensity": 1
                 }, {
                     "Type": "Transparent",
                     "Fac": 0.5

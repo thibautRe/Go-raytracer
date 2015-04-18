@@ -11,7 +11,7 @@ import (
 
 func main() {
     var scene rayobject.Scene
-    fileContent, err := ioutil.ReadFile("tests/transparent.json")
+    fileContent, err := ioutil.ReadFile("tests/multimat.json")
     if err != nil {
         fmt.Println(err)
     }
