@@ -15,6 +15,11 @@ type Material struct {
     Fac float64
 }
 
+type MaterialLightray struct {
+    Lightray raymath.Lightray
+    Material Material
+}
+
 func init() {
     rand.Seed(time.Now().UTC().UnixNano())
 }
@@ -88,4 +93,11 @@ func (m Material) GetDefaultLightray() raymath.Lightray {
         l.Power = 0
     }
     return l
+}
+
+func MixMaterialLightray(matlrs []MaterialLightray) raymath.Lightray {
+    var allColors = make([]color.RGBA, len(matlrs))
+    for _, matlr := range matlrs {
+        allColors[]
+    }
 }

@@ -79,8 +79,8 @@ func (scene Scene) GetLightray(r raymath.Ray, index int) raymath.Lightray {
     }
 
     if hasTouched {
-        for i := range touchedObject.Materials {
-            mat := touchedObject.Materials[i]
+        var materialLightrays []MaterialLightray
+        for _, mat := range touchedObject.Materials {
             bounceRays, bounceNumber := mat.GetBounceRays(impactPoint, normal, r, scene.Samples);
             var lightray raymath.Lightray
             if index <= scene.MaxRecursion || bounceNumber == 0 {
@@ -93,7 +93,11 @@ func (scene Scene) GetLightray(r raymath.Ray, index int) raymath.Lightray {
             } else {
                 lightray = mat.GetDefaultLightray()
             }
+
+            materialLightrays = append(materialLightrays, MaterialLightray{lightray, mat})
         }
+
+        return MixMaterialLightrays(materialLightrays)
     }
 
     // Else, return the backgroundcolor
