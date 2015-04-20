@@ -18,15 +18,18 @@
                 "Y": 0,
                 "Z": 2
             },
-            "Material": {
-                "Type": "Diffuse",
-                "Color": {
-                    "R": 255,
-                    "G": 0,
-                    "B": 50,
-                    "A": 255
+            "Materials": [
+                {
+                    "Type": "Diffuse",
+                    "Fac": 1,
+                    "Color": {
+                        "R": 255,
+                        "G": 0,
+                        "B": 50,
+                        "A": 255
+                    }
                 }
-            }
+            ]
         }, {
             "Type" : "Sphere",
             "Size": 2,
@@ -35,16 +38,19 @@
                 "Y": 1,
                 "Z": 2
             },
-            "Material": {
-                "Type": "Emit",
-                "Color": {
-                    "R": 0,
-                    "G": 255,
-                    "B": 20,
-                    "A": 255
-                },
-                "Intensity": 20
-            }
+            "Materials": [
+                {
+                    "Type": "Emit",
+                    "Fac": 1,
+                    "Color": {
+                        "R": 0,
+                        "G": 255,
+                        "B": 20,
+                        "A": 255
+                    },
+                    "Intensity": 20
+                }
+            ]
         }, {
             "Type": "Mesh",
             "Size": 1,
@@ -60,15 +66,18 @@
                     {"X": 1,"Y": -1,"Z": 0}
                 ]
             ],
-            "Material": {
-                "Type": "Diffuse",
-                "Color": {
-                    "R": 255,
-                    "G": 255,
-                    "B": 200,
-                    "A": 255
+            "Materials": [
+                {
+                    "Type": "Diffuse",
+                    "Fac": 1,
+                    "Color": {
+                        "R": 255,
+                        "G": 255,
+                        "B": 200,
+                        "A": 255
+                    }
                 }
-            }    
+            ]
         }
     ],
     "Camera": {

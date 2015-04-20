@@ -25,15 +25,18 @@
                     {"X": 1,"Y": 0,"Z": 0}
                 ]
             ],
-            "Materials": {
-                "Type": "Diffuse",
-                "Color": {
-                    "R": 255,
-                    "G": 255,
-                    "B": 255,
-                    "A": 255
+            "Materials": [
+                {
+                    "Type": "Diffuse",
+                    "Fac": 1,
+                    "Color": {
+                        "R": 255,
+                        "G": 255,
+                        "B": 255,
+                        "A": 255
+                    }
                 }
-            }    
+            ]
         }, {
             "Type": "Sphere",
             "Size": 2,
@@ -42,16 +45,19 @@
                 "Y": -2,
                 "Z": 1.5
             },
-            "Material": {
-                "Type": "Emit",
-                "Color": {
-                    "R": 255,
-                    "G": 255,
-                    "B": 255,
-                    "A": 255
-                },
-                "Intensity": 1
-            }
+            "Materials": [
+                {
+                    "Type": "Emit",
+                    "Fac": 1,
+                    "Color": {
+                        "R": 255,
+                        "G": 255,
+                        "B": 255,
+                        "A": 255
+                    },
+                    "Intensity": 1
+                }
+            ]
         }, {
             "Type": "Sphere",
             "Size": 2,
@@ -60,15 +66,18 @@
                 "Y": 2,
                 "Z": 1
             },
-            "Material": {
-                "Type": "Transparent",
-                "Color": {
-                    "R": 255,
-                    "G": 0,
-                    "B": 0,
-                    "A": 255
+            "Materials": [
+                {
+                    "Type": "Transparent",
+                    "Fac": 1,
+                    "Color": {
+                        "R": 255,
+                        "G": 0,
+                        "B": 0,
+                        "A": 255
+                    }
                 }
-            }
+            ]
         }
     ],
     "Camera": {
