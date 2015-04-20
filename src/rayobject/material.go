@@ -96,8 +96,24 @@ func (m Material) GetDefaultLightray() raymath.Lightray {
 }
 
 func MixMaterialLightray(matlrs []MaterialLightray) raymath.Lightray {
-    var allColors = make([]color.RGBA, len(matlrs))
+    var meanR, meanG, meanB, meanA float64
+    var sumFac float64
+    var l raymath.Lightray
+    var power float64
     for _, matlr := range matlrs {
-        allColors[]
+        sumFac += matlr.Material.Fac
+        meanR += float64(matlr.Lightray.Color.R)*matlr.Material.Fac
+        meanG += float64(matlr.Lightray.Color.G)*matlr.Material.Fac
+        meanB += float64(matlr.Lightray.Color.B)*matlr.Material.Fac
+        meanA += float64(matlr.Lightray.Color.A)*matlr.Material.Fac
+        power += matlr.Lightray.Power*matlr.Material.Fac
     }
+    meanR /= sumFac
+    meanG /= sumFac
+    meanB /= sumFac
+    meanA /= sumFac
+    power /= sumFac
+    l.Color = color.RGBA{uint8(meanR), uint8(meanG), uint8(meanB), uint8(meanA)}
+    l.Power = power
+    return l
 }

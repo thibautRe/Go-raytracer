@@ -97,7 +97,7 @@ func (scene Scene) GetLightray(r raymath.Ray, index int) raymath.Lightray {
             materialLightrays = append(materialLightrays, MaterialLightray{lightray, mat})
         }
 
-        return MixMaterialLightrays(materialLightrays)
+        return MixMaterialLightray(materialLightrays)
     }
 
     // Else, return the backgroundcolor
