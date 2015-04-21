@@ -6,12 +6,14 @@ An open-source Raytracer written in Golang
 
 ![Show1](https://raw.github.com/thibautRe/go-raytracer/master/render/show1.png)
 50 samples, 1 max recursion
+
+
 ![Show2](https://raw.github.com/thibautRe/go-raytracer/master/render/show2.png)
 100 samples, 0 max recursion
 
 ## Usage
 
-Run it with `go run main.go <scene file>`
+Run it with `go run main.go`. The scene file is written `main.go` file.
 
 ### Scene file description
 
